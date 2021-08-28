@@ -1,10 +1,12 @@
-﻿namespace UI
+﻿
+namespace FourInARowUI
 {
     public static class Program
     {
         public static void Main()
         {
-            UI.Run();
+            GameSettings bla = new GameSettings();
+            bla.ShowDialog();
         }
     }
 }
