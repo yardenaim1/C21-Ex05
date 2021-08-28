@@ -5,7 +5,7 @@ namespace FourInARowUI
     {
         public static void Main()
         {
-            GameSettings bla = new GameSettings();
+            GameSettingsForm bla = new GameSettingsForm();
             bla.ShowDialog();
         }
     }
