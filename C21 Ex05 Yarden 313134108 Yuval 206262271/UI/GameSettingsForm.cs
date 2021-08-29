@@ -10,6 +10,7 @@ using FourInARowUI;
 namespace FourInARowUI
 {
 
+
     public class GameSettingsForm : Form
     {
         private const string k_AIName = "[Computer]";
