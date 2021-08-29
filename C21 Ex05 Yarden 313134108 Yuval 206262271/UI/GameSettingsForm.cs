@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FourInARowUI;
-using UI;
 
 namespace FourInARowUI
 {
@@ -14,21 +13,10 @@ namespace FourInARowUI
     public class GameSettingsForm : Form
     {
         private const string k_AIName = "[Computer]";
+        private const int k_MaxRowsAndCols = 8;
+        private const int k_MinRowsAndCols = 4;
 
-        //private Label m_LabelPlayers = new Label();
-        //private Label m_LabelPlayer1 = new Label();
-        //private Label m_LabelPlayer2 = new Label();
-        //private Label m_LabelBoardSize = new Label();
-        //private Label m_LabelRows = new Label();
-        //private Label m_LabelCols = new Label();
-        //private TextBox m_TextboxPlayer1 = new TextBox();
-        //private TextBox m_TextboxPlayer2 = new TextBox();
-        //private CheckBox m_CheckBoxPlayer2 = new CheckBox();
-        //private NumericUpDown m_NumericUpDownRows = new NumericUpDown();
-        //private NumericUpDown m_NumericUpDownCols = new NumericUpDown();
-        //private Button m_ButtonStart = new Button();
-
-        private Label label1Players;
+        private Label labelPlayers;
         private Label labelPlayer1;
         private CheckBox checkBoxPlayer2;
         private TextBox textBoxPlayer1;
@@ -48,7 +36,7 @@ namespace FourInARowUI
 
         private void InitializeComponent()
         {
-            this.label1Players = new System.Windows.Forms.Label();
+            this.labelPlayers = new System.Windows.Forms.Label();
             this.labelPlayer1 = new System.Windows.Forms.Label();
             this.checkBoxPlayer2 = new System.Windows.Forms.CheckBox();
             this.textBoxPlayer1 = new System.Windows.Forms.TextBox();
@@ -59,25 +47,25 @@ namespace FourInARowUI
             this.labelRows = new System.Windows.Forms.Label();
             this.labelCols = new System.Windows.Forms.Label();
             this.buttonStartGame = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRows)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCols)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(numericUpDownRows)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(numericUpDownCols)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1Players
+            // labelPlayers
             // 
-            this.label1Players.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label1Players.Location = new System.Drawing.Point(21, 19);
-            this.label1Players.Name = "label1Players";
-            this.label1Players.Size = new System.Drawing.Size(77, 20);
-            this.label1Players.TabIndex = 0;
-            this.label1Players.Text = "Players:";
+            this.labelPlayers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelPlayers.Location = new System.Drawing.Point(21, 19);
+            this.labelPlayers.Name = "labelPlayers";
+            this.labelPlayers.Size = new System.Drawing.Size(77, 20);
+            this.labelPlayers.TabIndex = 0;
+            this.labelPlayers.Text = "Players:";
             // 
             // labelPlayer1
             // 
             this.labelPlayer1.AutoSize = true;
             this.labelPlayer1.Location = new System.Drawing.Point(45, 52);
             this.labelPlayer1.Name = "labelPlayer1";
-            this.labelPlayer1.Size = new System.Drawing.Size(57, 13);
+            this.labelPlayer1.Size = new System.Drawing.Size(84, 20);
             this.labelPlayer1.TabIndex = 1;
             this.labelPlayer1.Text = "Player 1:";
             // 
@@ -86,7 +74,7 @@ namespace FourInARowUI
             this.checkBoxPlayer2.AutoSize = true;
             this.checkBoxPlayer2.Location = new System.Drawing.Point(48, 78);
             this.checkBoxPlayer2.Name = "checkBoxPlayer2";
-            this.checkBoxPlayer2.Size = new System.Drawing.Size(76, 17);
+            this.checkBoxPlayer2.Size = new System.Drawing.Size(110, 24);
             this.checkBoxPlayer2.TabIndex = 1;
             this.checkBoxPlayer2.Text = "Player 2:";
             this.checkBoxPlayer2.UseVisualStyleBackColor = true;
@@ -96,7 +84,7 @@ namespace FourInARowUI
             // 
             this.textBoxPlayer1.Location = new System.Drawing.Point(132, 49);
             this.textBoxPlayer1.Name = "textBoxPlayer1";
-            this.textBoxPlayer1.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPlayer1.Size = new System.Drawing.Size(100, 26);
             this.textBoxPlayer1.TabIndex = 0;
             // 
             // textBoxPlayer2
@@ -104,9 +92,9 @@ namespace FourInARowUI
             this.textBoxPlayer2.Enabled = false;
             this.textBoxPlayer2.Location = new System.Drawing.Point(132, 76);
             this.textBoxPlayer2.Name = "textBoxPlayer2";
-            this.textBoxPlayer2.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPlayer2.Size = new Size(100, 26);
             this.textBoxPlayer2.TabIndex = 2;
-            this.textBoxPlayer2.Text = "[Computer]";
+            this.textBoxPlayer2.Text = k_AIName;
             // 
             // labelBoardSize
             // 
@@ -114,53 +102,29 @@ namespace FourInARowUI
             this.labelBoardSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.labelBoardSize.Location = new System.Drawing.Point(21, 139);
             this.labelBoardSize.Name = "labelBoardSize";
-            this.labelBoardSize.Size = new System.Drawing.Size(92, 17);
+            this.labelBoardSize.Size = new System.Drawing.Size(125, 25);
             this.labelBoardSize.TabIndex = 6;
             this.labelBoardSize.Text = "Board Size:";
             // 
             // numericUpDownRows
             // 
             this.numericUpDownRows.Location = new System.Drawing.Point(89, 172);
-            this.numericUpDownRows.Maximum = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.numericUpDownRows.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.numericUpDownRows.Maximum = k_MaxRowsAndCols;
+            this.numericUpDownRows.Minimum = k_MinRowsAndCols;
             this.numericUpDownRows.Name = "numericUpDownRows";
-            this.numericUpDownRows.Size = new System.Drawing.Size(35, 20);
+            this.numericUpDownRows.Size = new System.Drawing.Size(35, 26);
             this.numericUpDownRows.TabIndex = 3;
-            this.numericUpDownRows.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.numericUpDownRows.Value = k_MinRowsAndCols;
             // 
             // numericUpDownCols
             // 
             this.numericUpDownCols.Location = new System.Drawing.Point(210, 172);
-            this.numericUpDownCols.Maximum = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.numericUpDownCols.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.numericUpDownCols.Maximum = k_MaxRowsAndCols;
+            this.numericUpDownCols.Minimum = k_MinRowsAndCols;
             this.numericUpDownCols.Name = "numericUpDownCols";
-            this.numericUpDownCols.Size = new System.Drawing.Size(35, 20);
+            this.numericUpDownCols.Size = new System.Drawing.Size(35, 26);
             this.numericUpDownCols.TabIndex = 4;
-            this.numericUpDownCols.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.numericUpDownCols.Value = k_MinRowsAndCols;
             // 
             // labelRows
             // 
@@ -195,7 +159,7 @@ namespace FourInARowUI
             // 
             this.AcceptButton = this.buttonStartGame;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new Size(284, 261);
             this.Controls.Add(this.buttonStartGame);
             this.Controls.Add(this.labelCols);
             this.Controls.Add(this.labelRows);
@@ -206,7 +170,7 @@ namespace FourInARowUI
             this.Controls.Add(this.textBoxPlayer1);
             this.Controls.Add(this.checkBoxPlayer2);
             this.Controls.Add(this.labelPlayer1);
-            this.Controls.Add(this.label1Players);
+            this.Controls.Add(this.labelPlayers);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -222,51 +186,6 @@ namespace FourInARowUI
 
         }
 
-        //private void YuvalInitializeComponent()
-        //{
-        //    //Players Label
-        //    this.m_LabelPlayers.AutoSize = true;
-        //    this.m_LabelPlayers.Location = new System.Drawing.Point(15, 15);
-        //    this.m_LabelPlayers.TabIndex = 0;
-        //    this.m_LabelPlayers.Text = "Players:";
-        //    this.Controls.Add(m_LabelPlayers);
-            
-        //    //Player1 Label
-        //    this.m_LabelPlayer1.AutoSize = true;
-        //    this.m_LabelPlayer1.Location = new System.Drawing.Point(29, 39);
-        //    this.m_LabelPlayer1.TabIndex = 1;
-        //    this.m_LabelPlayer1.Text = "Player 1:";
-        //    this.Controls.Add(m_LabelPlayer1);
-
-        //    //Player 1 textBox
-        //    int textBoxPlayer1Top = m_LabelPlayer1.Top + m_LabelPlayer1.Height / 2;
-        //    textBoxPlayer1Top -= m_TextboxPlayer1.Height / 2;
-
-        //    this.m_TextboxPlayer1.Location = new Point(m_LabelPlayer1.Right + 15, textBoxPlayer1Top);
-        //    this.m_TextboxPlayer1.TabIndex = 2;
-        //    this.Controls.Add(m_TextboxPlayer1);
-
-        //    //Player2 Label
-        //    this.m_LabelPlayer2.AutoSize = true;
-        //    this.m_LabelPlayer2.Location = new System.Drawing.Point(29, 59);
-        //    this.m_LabelPlayer2.TabIndex = 3;
-        //    this.m_LabelPlayer2.Text = "Player 2:";
-        //    this.Controls.Add(m_LabelPlayer2);
-
-        //    //Player 2 textBox
-        //    int textBoxPlayer2Top = m_LabelPlayer2.Top + m_LabelPlayer2.Height / 2;
-        //    textBoxPlayer2Top -= m_TextboxPlayer2.Height / 2;
-        //    m_TextboxPlayer2.Enabled = false;
-        //    this.m_TextboxPlayer2.Location = new System.Drawing.Point(m_LabelPlayer2.Right + 15, textBoxPlayer2Top);
-        //    this.m_TextboxPlayer2.TabIndex = 4;
-        //    m_TextboxPlayer2.Text = "[Computer]";
-        //    this.Controls.Add(m_TextboxPlayer2);
-
-        //    //Player2 check Box
-        //    m_CheckBoxPlayer2.AutoSize = true;
-        //    this.Controls.Add(m_CheckBoxPlayer2);
-        //}
-        
         private void checkBoxSecondPlayer_Click(object sender, System.EventArgs e)
         {
             this.textBoxPlayer2.Enabled = !this.textBoxPlayer2.Enabled;
@@ -285,18 +204,18 @@ namespace FourInARowUI
             }
             else
             {
-                GameForm gameForm = new GameForm(BoardHeight, BoardWidth, Player1Name, Player2Name, IsPlayer2AI);
+                GameForm gameForm = new GameForm(BoardRows, BoardCols, Player1Name, Player2Name, IsPlayer2AI);
                 this.Dispose();
                 gameForm.ShowDialog();
             }
         }
 
-        public int BoardHeight
+        public int BoardRows
         {
             get { return (int)this.numericUpDownRows.Value; }
         }
 
-        public int BoardWidth
+        public int BoardCols
         {
             get { return (int)numericUpDownCols.Value; }
         }
